@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +6,10 @@ class Provider extends InheritedWidget {
 
   final Widget child;
 
-  static Provider of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<Provider>();
+  final bloc = Bloc();
+
+  static Bloc of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<Provider>().bloc;
   }
 
   @override

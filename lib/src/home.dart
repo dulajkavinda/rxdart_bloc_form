@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import './blocs/bloc.dart';
+import 'blocs/provider.dart';
 
 class Home extends StatelessWidget {
-  final bloc = Bloc();
-
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -15,8 +15,8 @@ class Home extends StatelessWidget {
         margin: EdgeInsets.all(20.0),
         child: Column(
           children: [
-            buildEmailField(),
-            buildPasswordField(),
+            buildEmailField(bloc),
+            buildPasswordField(bloc),
             Container(
               margin: EdgeInsets.only(top: 10.0),
             ),
@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
         ),
       );
 
-  Widget buildPasswordField() {
+  Widget buildPasswordField(Bloc bloc) {
     return StreamBuilder<Object>(
         stream: bloc.password,
         builder: (context, snapshot) {
@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
         });
   }
 
-  Widget buildEmailField() {
+  Widget buildEmailField(Bloc bloc) {
     return StreamBuilder(
         stream: bloc.email,
         builder: (context, snapshot) {
