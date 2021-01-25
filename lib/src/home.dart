@@ -20,21 +20,25 @@ class Home extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 10.0),
             ),
-            buildSubmitButton()
+            buildSubmitButton(bloc)
           ],
         ),
       ),
     );
   }
 
-  RaisedButton buildSubmitButton() => RaisedButton(
-        onPressed: () {},
-        color: Colors.blue,
-        child: Text(
-          'Submit',
-          style: TextStyle(color: Colors.white),
-        ),
-      );
+  Widget buildSubmitButton(Bloc bloc) => StreamBuilder(
+      stream: bloc.submitValid,
+      builder: (context, snapshot) {
+        return RaisedButton(
+          onPressed: snapshot.hasData ? bloc.submit : null,
+          color: Colors.blue,
+          child: Text(
+            'Submit',
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      });
 
   Widget buildPasswordField(Bloc bloc) {
     return StreamBuilder<Object>(
